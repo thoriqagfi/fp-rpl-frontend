@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 const Footer = () => {
   return (
@@ -8,19 +9,19 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
               <a href="#" className="flex items-center">
-                  <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="FlowBite Logo" />
+                  <Image src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="FlowBite Logo" height={30} width={30}/>
                   <span className="self-center text-2xl font-semibold whitespace-nowrap">Ecommerce</span>
               </a>
               <div className="flex justify-start my-4">
                 <a href='#' className="flex items-center border border-gray-900 w-auto rounded-lg px-4 py-2 mr-2 hover:bg-gray-300">
-                    <img src="https://cdn-icons-png.flaticon.com/512/888/888857.png" className="w-7 md:w-8" />
+                    <Image src="/playstore.png" alt="img" className="w-7 md:w-8" height={30} width={30}/>
                     <div className="text-left ml-3">
                         <p className='text-xs text-gray-900'>Download on </p>
                         <p className="text-sm md:text-base"> Google Play Store </p>
                     </div>
                 </a>
                 <a href='#' className="flex items-center border border-gray-900 w-auto rounded-lg px-4 py-2 mx-2 hover:bg-gray-300">
-                    <img src="https://cdn-icons-png.flaticon.com/512/888/888841.png" className="w-7 md:w-8" />
+                    <Image src="/apple.png" alt="img" className="w-7 md:w-8" height={30} width={30}/>
                     <div className="text-left ml-3">
                         <p className='text-xs text-gray-900'>Download on </p>
                         <p className="text-sm md:text-base"> Apple Store </p>
