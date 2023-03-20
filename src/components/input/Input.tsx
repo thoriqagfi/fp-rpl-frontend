@@ -26,7 +26,7 @@ export default function Input({
   } = useFormContext();
 
   return (
-    <div className="w-4/5 md:w-1/2">
+    <div className="w-4/5 md:w-7/12">
       <label htmlFor={inputType}>{titleLabel}</label>
       <span
         className={`flex bg-transparent rounded-md border-gray-300 hover:border-gray-400 border-[1px] px-2 py-${paddingY}`}

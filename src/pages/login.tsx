@@ -77,7 +77,7 @@ export default function Login() {
               errorMessage={errors.email?.message}
             />
 
-            <div className="w-4/5 md:w-1/2">
+            <div className="w-4/5 md:w-7/12">
               <label htmlFor="password">Password</label>
               <span className="flex hover:border-gray-400 duration-200 bg-transparent rounded-md border-gray-300 border-[1px] px-2 py-2">
                 <input
@@ -99,7 +99,7 @@ export default function Login() {
               <p className="text-red-500 text-sm">{errors.password?.message}</p>
             </div>
 
-            <span className="w-4/5 md:w-1/2 flex justify-between items-center">
+            <span className="w-4/5 md:w-7/12 flex justify-between items-center">
               <label>
                 <input
                   type="checkbox"
@@ -116,14 +116,14 @@ export default function Login() {
 
             <button
               type="submit"
-              className="rounded-md cursor-pointer bg-gray-900 hover:bg-gray-800 p-2 text-white w-4/5 md:w-1/2 duration-200"
+              className="rounded-md cursor-pointer bg-gray-900 hover:bg-gray-800 p-2 text-white w-4/5 md:w-7/12 duration-200"
             >
               Log in
             </button>
           </form>
         </FormProvider>
 
-        <button className="flex items-center justify-center gap-3 mt-2 rounded-md cursor-pointer border-[1px] hover:border-gray-400 border-gray-300 p-2 w-4/5 md:w-1/2 duration-200">
+        <button className="flex items-center justify-center gap-3 mt-2 rounded-md cursor-pointer border-[1px] hover:border-gray-400 border-gray-300 p-2 w-4/5 md:w-7/12 duration-200">
           <Image className="w-5" src={GoogleIcon} alt="" />
           <span>Log in with Google</span>
         </button>
