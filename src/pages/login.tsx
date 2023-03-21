@@ -1,24 +1,20 @@
+import * as React from "react";
 import Image from "next/image";
-
-import { useState, useEffect } from "react";
 import {useRouter} from "next/router";
+import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 
 import Input from "@/components/input/Input";
+import { LoginForm } from "@/types/loginForm";
 
-import EcomerceImage from "~/public/4k.jpg";
-import GoogleIcon from "~/public/google-icon.svg";
-import Link from "next/link";
+import EcomerceImage from "public/4k.jpg";
+import GoogleIcon from "public/google-icon.svg";
 
-type FormValues = {
-  email: string;
-  password: string;
-};
+
 
 export default function Login() {
   const router = useRouter();
-  const [passwordShown, setPasswordShown] = useState(false);
-  const methods = useForm<FormValues>({
+  const methods = useForm<LoginForm>({
     mode: "onChange",
     defaultValues: {
       email: "",
@@ -27,18 +23,13 @@ export default function Login() {
   });
 
   const {
-    register,
     handleSubmit,
     reset,
     formState,
     formState: { errors },
   } = methods;
 
-  register("password", {
-    required: "This is required!",
-  });
-
-  useEffect(() => {
+  React.useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset({
         email: "",
