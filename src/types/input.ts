@@ -7,5 +7,4 @@ export type InputProps = {
   registerType: RegisterOptions;
   placeholder: string;
   errorMessage?: string;
-  paddingY: number;
 } & React.ComponentPropsWithoutRef<"input">;

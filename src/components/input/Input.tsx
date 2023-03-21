@@ -12,7 +12,6 @@ export default function Input({
   registerType,
   placeholder,
   errorMessage,
-  paddingY = 2,
   ...rest
 }: InputProps) {
   const {
