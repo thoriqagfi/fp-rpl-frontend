@@ -3,17 +3,17 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import {useRouter} from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
-
-import Input from "@/components/input/Input";
-
-import EcomerceImage from "~/public/4k.jpg";
-import GoogleIcon from "~/public/google-icon.svg";
 import Link from "next/link";
 
-type FormValues = {
-  email: string;
-  password: string;
-};
+import Input from "@/components/input/Input";
+import { FormValues } from "@/types/loginForm";
+
+import EcomerceImage from "public/4k.jpg";
+import GoogleIcon from "public/google-icon.svg";
+import Eye from "public/eye.svg";
+import EyeSlash from "public/eye-slash.svg";
+
+
 
 export default function Login() {
   const router = useRouter();
@@ -33,10 +33,6 @@ export default function Login() {
     formState,
     formState: { errors },
   } = methods;
-
-  register("password", {
-    required: "This is required!",
-  });
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {

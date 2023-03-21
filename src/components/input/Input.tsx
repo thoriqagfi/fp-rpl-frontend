@@ -1,18 +1,9 @@
-import { RegisterOptions, useFormContext } from "react-hook-form";
-import { AiFillEyeInvisible, AiFillEye} from "react-icons/ai";
-
 import * as React from "react";
 
-type InputProps = {
-  id: string;
-  titleLabel: string;
-  inputType: string;
-  registerType: RegisterOptions;
-  placeholder: string;
-  errorMessage?: string;
-  paddingY?: number;
-  showPassword?: boolean;
-} & React.ComponentPropsWithoutRef<"input">;
+import { useFormContext } from "react-hook-form";
+
+import { InputProps } from "@/types/input";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export default function Input({
   id,
@@ -22,7 +13,6 @@ export default function Input({
   placeholder,
   errorMessage,
   paddingY = 2,
-  showPassword = false,
   ...rest
 }: InputProps) {
   const {
