@@ -1,14 +1,13 @@
 import Image from "next/image";
 
 import { useState, useEffect } from "react";
+import {useRouter} from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 
 import Input from "@/components/input/Input";
 
-import EcomerceImage from "public/4k.jpg";
-import GoogleIcon from "public/google-icon.svg";
-import Eye from "public/eye.svg";
-import EyeSlash from "public/eye-slash.svg";
+import EcomerceImage from "~/public/4k.jpg";
+import GoogleIcon from "~/public/google-icon.svg";
 import Link from "next/link";
 
 type FormValues = {
@@ -17,10 +16,14 @@ type FormValues = {
 };
 
 export default function Login() {
+  const router = useRouter();
   const [passwordShown, setPasswordShown] = useState(false);
-
   const methods = useForm<FormValues>({
     mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    }
   });
 
   const {
@@ -51,6 +54,7 @@ export default function Login() {
           <form
             onSubmit={handleSubmit((data) => {
               // console.log(data);
+              router.push("#");
             })}
             className={`flex flex-col gap-y-4 w-full items-center justify-center`}
           >
@@ -64,40 +68,32 @@ export default function Login() {
             <Input
               id="email"
               titleLabel="Email Address"
-              inputType="text"
+              inputType="email"
               registerType={{
-                required: "This is required!",
+                required: "Email is required!",
                 pattern: {
                   value: /^\S+@\S+[.]+\S/i,
-                  message: "Invalid Email",
+                  message: "Invalid Email address",
                 },
               }}
               placeholder="Email"
-              paddingY={2}
               errorMessage={errors.email?.message}
             />
 
-            <div className="w-4/5 md:w-7/12">
-              <label htmlFor="password">Password</label>
-              <span className="flex hover:border-gray-400 duration-200 bg-transparent rounded-md border-gray-300 border-[1px] px-2 py-2">
-                <input
-                  type={passwordShown ? "text" : "password"}
-                  {...register("password")}
-                  placeholder="Password"
-                  className="w-full focus:placeholder:opacity-0 focus:outline-none bg-transparent"
-                />
-                <Image
-                  onClick={() => {
-                    setPasswordShown(!passwordShown);
-                  }}
-                  src={passwordShown ? EyeSlash : Eye}
-                  // src=""
-                  className="cursor-pointer scale-90"
-                  alt=""
-                />
-              </span>
-              <p className="text-red-500 text-sm">{errors.password?.message}</p>
-            </div>
+            <Input
+              id="password"
+              titleLabel="Password"
+              inputType="password"
+              registerType={{
+                required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must have at least 6 characters",
+                  }
+              }}
+              placeholder="Password"
+              errorMessage={errors.password?.message}
+            />
 
             <span className="w-4/5 md:w-7/12 flex justify-between items-center">
               <label>
