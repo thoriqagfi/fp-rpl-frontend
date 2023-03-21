@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
       <main className='bg-white'>
         <div className='h-screen'>
-        {/* <Navbar /> */}
+        {/* <Navbar />  */}
         <Navbar2 />
         </div>
         <Footer/>

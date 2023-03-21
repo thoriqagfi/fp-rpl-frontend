@@ -65,7 +65,7 @@ const items2: MenuProps['items'] = [
 export const DropdownsStart: React.FC = () => (
     <Space wrap>
       <Dropdown menu={{ items }} placement="bottomRight" arrow>
-      <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2">Get Started</button>
+      <button type="button" className="text-white cursor-pointer bg-gray-900 hover:bg-gray-800 duration-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Get Started</button>
       </Dropdown>
       <Dropdown menu={{ items: items2 }}placement="bottomRight">
       <button type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-sticky" aria-expanded="false">
