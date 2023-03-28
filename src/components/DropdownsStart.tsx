@@ -1,7 +1,6 @@
 import React from 'react';
 import type { MenuProps } from 'antd';
-import Image from 'next/image';
-import { Button, Dropdown, Space } from 'antd';
+import { Dropdown, Space } from 'antd';
 
 type ButtonDropdownType = {
   className: string;
