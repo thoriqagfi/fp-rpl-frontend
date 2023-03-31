@@ -3,7 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
+import { apiMock } from "@/lib/apiMock";
 import Input from "@/components/input/Input";
 import SelectInput from "@/components/input/SelectInput";
 import { RegisterForm } from "@/types/register";
@@ -12,10 +15,27 @@ import EcomerceImage from "public/4k.jpg";
 import GoogleIcon from "public/google-icon.svg";
 
 export default function Login() {
+  const { mutate, isSuccess, data, isError, isLoading } = useMutation(
+    async (data: RegisterForm) => {
+      const res = await apiMock.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/register`, data);
+      return res;
+    }
+  )
   const router = useRouter();
   const methods = useForm<RegisterForm>({
     mode: "onChange",
   });
+
+  const onSubmit = async (data: RegisterForm) => {
+    try {
+      console.log("Registrasi berhasil" + data);
+      mutate(data);
+      router.push("/login");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const {
     handleSubmit,
@@ -27,14 +47,14 @@ export default function Login() {
   React.useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
-        phoneNumber: undefined,
+        no_telp: undefined,
         city: '',
+        role: "",
         address: '',
         password: "",
-        role: "",
       });
     }
   }, [formState, reset]);
@@ -44,10 +64,7 @@ export default function Login() {
       <div className="flex flex-col min-h-[93vh] w-full md:w-[55%] rounded-2xl items-center justify-center">
         <FormProvider {...methods}>
           <form
-            onSubmit={handleSubmit((data) => {
-              // console.log(data);
-              // router.push("#")
-            })}
+            onSubmit={handleSubmit(onSubmit)}
             className={`flex flex-col gap-y-1 w-full items-center justify-center`}
           >
             <span className="flex flex-col items-center">
@@ -61,7 +78,7 @@ export default function Login() {
 
             <div className="flex gap-2 w-4/5 md:w-7/12">
               <Input
-                id="firstName"
+                id="first_name"
                 titleLabel="First Name"
                 inputType="text"
                 registerType={{
@@ -72,11 +89,11 @@ export default function Login() {
                   },
                 }}
                 placeholder="First Name"
-                errorMessage={errors.firstName?.message}
+                errorMessage={errors.first_name?.message}
               />
 
               <Input
-                id="lastName"
+                id="last_name"
                 titleLabel="Last Name"
                 inputType="text"
                 registerType={{
@@ -87,7 +104,7 @@ export default function Login() {
                   },
                 }}
                 placeholder="Last Name"
-                errorMessage={errors.lastName?.message}
+                errorMessage={errors.last_name?.message}
               />
             </div>
 
@@ -107,7 +124,7 @@ export default function Login() {
             />
 
             <Input
-              id="phoneNumber"
+              id="no_telp"
               titleLabel="Phone Number"
               inputType="tel"
               registerType={{
@@ -122,7 +139,7 @@ export default function Login() {
                 },
               }}
               placeholder="Phone Number"
-              errorMessage={errors.phoneNumber?.message}
+              errorMessage={errors.no_telp?.message}
             />
 
             <div className="flex gap-2 w-4/5 md:w-7/12">
