@@ -1,10 +1,10 @@
 export type RegisterForm = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phoneNumber: number;
+  no_telp: number;
   city: string;
+  role: string;
   address: string;
   password: string;
-  role: string;
 };

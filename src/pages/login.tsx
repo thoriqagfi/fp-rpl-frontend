@@ -3,16 +3,40 @@ import Image from "next/image";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
+import useAuthStore from "@/store/AuthStore";
 import Input from "@/components/input/Input";
 import { LoginForm } from "@/types/loginForm";
 
 import EcomerceImage from "public/4k.jpg";
 import GoogleIcon from "public/google-icon.svg";
-
-
+import { setToken } from "@/lib/token";
+import { apiMock } from "@/lib/apiMock";
 
 export default function Login() {
+  const { login } = useAuthStore();
+  const { mutate, isSuccess, data, isError, isLoading } = useMutation(
+    async ({ email, password }: LoginForm) => {
+      const res = await apiMock.post(`${process.env.NEXT_PUBLIC_API_URL}/customer/login`, {email, password})
+      return res.data;
+    },
+    {
+      onSuccess: async (data) => {
+        setToken('token', data.token);
+        console.log(data);
+
+        const user = await apiMock.get(`${process.env.NEXT_PUBLIC_API_URL}/me`)
+        login(user.data);
+      }
+    }
+  )
+
+  const onSubmit = ({email, password}: LoginForm) => {
+    mutate({email, password});
+  }
+
   const router = useRouter();
   const methods = useForm<LoginForm>({
     mode: "onChange",
@@ -43,10 +67,7 @@ export default function Login() {
       <div className="flex flex-col min-h-[93vh] w-full md:w-[55%] rounded-2xl items-center justify-center">
         <FormProvider {...methods}>
           <form
-            onSubmit={handleSubmit((data) => {
-              // console.log(data);
-              router.push("#");
-            })}
+            onSubmit={handleSubmit(onSubmit)}
             className={`flex flex-col gap-y-4 w-full items-center justify-center`}
           >
             <span className="flex flex-col items-center">
