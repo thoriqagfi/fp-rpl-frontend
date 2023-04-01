@@ -5,6 +5,7 @@ enum RoleType {
 }
 
 export type User = {
+  id: number;
   first_name: string;
   last_name: string;
   email: string;
@@ -13,4 +14,5 @@ export type User = {
   address: string;
   token: string;
   role: RoleType;
+  password: string;
 }

@@ -4,11 +4,11 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 
 import useAuthStore from "@/store/AuthStore";
 import Input from "@/components/input/Input";
 import { LoginForm } from "@/types/loginForm";
+import { getToken } from "@/lib/token";
 
 import EcomerceImage from "public/4k.jpg";
 import GoogleIcon from "public/google-icon.svg";
@@ -17,22 +17,35 @@ import { apiMock } from "@/lib/apiMock";
 
 export default function Login() {
   const { login } = useAuthStore();
-  const { mutate, isSuccess, data, isError, isLoading } = useMutation(
+  const { mutate, isSuccess, isError, isLoading } = useMutation(
     async ({ email, password }: LoginForm) => {
-      const res = await apiMock.post(`${process.env.NEXT_PUBLIC_API_URL}/customer/login`, {email, password})
-      return res.data;
-    },
-    {
-      onSuccess: async (data) => {
+      await apiMock.post(`https://fp-rpl-backend-api-production.up.railway.app/seller/login`, {email, password})
+      .then( async (res) => {
+        console.log(res)
+        const data = res.data.data;
         setToken('token', data.token);
-        console.log(data);
 
-        const user = await apiMock.get(`${process.env.NEXT_PUBLIC_API_URL}/me`)
-        login(user.data);
-      }
+        const user = await apiMock.get(`https://fp-rpl-backend-api-production.up.railway.app/seller/profile`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`
+          }
+        })
+        login({
+          id: user.data.data.id,
+          first_name: user.data.data.first_name,
+          last_name: user.data.data.last_name,
+          email: user.data.data.email,
+          no_telp: user.data.data.no_telp,
+          city: user.data.data.city,
+          role: user.data.data.role,
+          address: user.data.data.address,
+          token: data.token,
+          password: user.data.data.password
+        })
+        router.push('/')
+      })
     }
   )
-
   const onSubmit = ({email, password}: LoginForm) => {
     mutate({email, password});
   }

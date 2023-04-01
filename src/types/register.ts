@@ -2,7 +2,7 @@ export type RegisterForm = {
   first_name: string;
   last_name: string;
   email: string;
-  no_telp: number;
+  no_telp: string;
   city: string;
   role: string;
   address: string;
