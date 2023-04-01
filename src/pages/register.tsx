@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 
 import { apiMock } from "@/lib/apiMock";
 import Input from "@/components/input/Input";
@@ -15,10 +14,10 @@ import EcomerceImage from "public/4k.jpg";
 import GoogleIcon from "public/google-icon.svg";
 
 export default function Login() {
-  const { mutate, isSuccess, data, isError, isLoading } = useMutation(
+  const { mutate, isSuccess, isError, isLoading } = useMutation(
     async (data: RegisterForm) => {
       const res = await apiMock.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/register`, data);
+      `https://fp-rpl-backend-api-production.up.railway.app/register`, data);
       return res;
     }
   )
@@ -29,14 +28,12 @@ export default function Login() {
 
   const onSubmit = async (data: RegisterForm) => {
     try {
-      console.log("Registrasi berhasil" + data);
       mutate(data);
       router.push("/login");
     } catch (err) {
       console.log(err);
     }
   }
-
   const {
     handleSubmit,
     reset,
@@ -45,7 +42,10 @@ export default function Login() {
   } = methods;
 
   React.useEffect(() => {
-    if (formState.isSubmitSuccessful) {
+    if(isLoading) {
+      <h1>Loading...</h1>
+    }
+    if (formState.isSubmitSuccessful && isSuccess) {
       reset({
         first_name: "",
         last_name: "",
@@ -57,7 +57,10 @@ export default function Login() {
         password: "",
       });
     }
-  }, [formState, reset]);
+    if(isError) {
+      <h1>Error</h1>
+    }
+  }, [formState, reset, isLoading, isSuccess, isError]);
 
   return (
     <section className="min-h-screen w-full bg-white p-6 dark:bg-darkBG text-black flex justify-center items-center font-poppins">
@@ -159,7 +162,7 @@ export default function Login() {
                 registerType={{
                   required: "This is required!",
                 }}
-                options={['Seller', 'Customer']}
+                options={['seller', 'customer']}
               />
             </div>
 
