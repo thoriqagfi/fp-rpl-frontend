@@ -49,14 +49,14 @@ export default function Home() {
                     </div>
                     <div className="mt-4 xl:my-2 flex flex-col xl:items-center md:flex-row">
                       <a
-                        href="/"
+                        href="#"
                         className="bg-sky-400a mr-6 inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-r from-lime-400 to-sky-400 px-8 font-medium tracking-wide text-white shadow-lg shadow-blue-300 outline-none transition duration-200 hover:scale-110 hover:bg-sky-500 focus:ring"
                       >
                         {" "}
                         Explore Now{" "}
                       </a>
                       <a
-                        href="/"
+                        href="#"
                         aria-label=""
                         className="group xl:inline-flex hidden items-center font-semibold text-white"
                       >

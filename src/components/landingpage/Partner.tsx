@@ -4,18 +4,22 @@ import Image from "next/image";
 const Partner = () => {
   const Partner = [
     {
+      id: "1",
       logo: "/partner1.png",
       name: "Nasa",
     },
     {
+      id: "2",
       logo: "/partner2.png",
       name: "Amazon",
     },
     {
+      id: "3",
       logo: "/partner3.png",
       name: "Nike",
     },
     {
+      id: "4",
       logo: "/partner4.png",
       name: "Ikea",
     },
@@ -44,7 +48,7 @@ const Partner = () => {
           <div className="mb-6 md:mb-0">
             <div className="grid grid-cols-2 gap-6">
               {Partner.map((item) => (
-                <div className="mb-12">
+                <div className="mb-12" key={item.id}>
                   <Image
                     src={item.logo}
                     className="px-6"

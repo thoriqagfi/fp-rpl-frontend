@@ -6,12 +6,14 @@ import { TbCategory } from "react-icons/tb";
 const Menu = () => {
   const Category = [
     {
+      id: "1",
       title: "Location",
       icon: <MdLocationPin />,
       title2: "United States",
       title3: "Indonesia",
     },
     {
+      id: "2",
       title: "Product",
       icon: <TbCategory />,
       title2: "Merch",
@@ -20,12 +22,14 @@ const Menu = () => {
   ];
   const Category2 = [
     {
+      id: "1",
       title: "Merchant",
       icon: <BsShopWindow />,
       title2: "Verified",
       title3: "Other",
     },
     {
+      id: "2",
       title: "Filter",
       icon: <BsFilter />,
       title2: "Filter 1",
@@ -37,7 +41,7 @@ const Menu = () => {
     <div className="-mt-20 xl:-mt-28 xl:p-6 mb-1 bg-white shadow-xl flex flex-col xl:flex-row mx-2 xl:mx-40 rounded-lg relative z-10">
       <div className="flex flex-row pt-2 pb-1 xl:py-4">
         {Category.map((category) => (
-          <details className="group transition-all duration-150 h-10 open:h-32 overflow-hidden w-56">
+          <details className="group transition-all duration-150 h-10 open:h-32 overflow-hidden w-56" key={category.id}>
             <summary className="transition-all duration-500 flex cursor-pointer items-center rounded-lg px-8 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
               <span className="text-2xl">{category.icon}</span>
 
@@ -119,7 +123,7 @@ const Menu = () => {
       </div>
       <div className="flex flex-row pt-1 xl:py-4">
         {Category2.map((category) => (
-          <details className="group transition-all duration-150 h-10 open:h-32 overflow-hidden w-56">
+          <details className="group transition-all duration-150 h-10 open:h-32 overflow-hidden w-56" key={category.id}>
             <summary className="transition-all duration-500 flex cursor-pointer items-center rounded-lg px-8 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
               <span className="text-2xl">{category.icon}</span>
 
