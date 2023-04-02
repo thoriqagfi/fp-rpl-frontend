@@ -3,24 +3,28 @@ import React from "react";
 const ContentTab1 = () => {
   const ChooseUs = [
     {
+      id: "1",
       icon: "M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z",
       title: "Support 24",
       description:
         "Pellentesque mollis, metus nec fringilla aliquam. Donec consequat orci quis volutpat imperdiet.",
     },
     {
+      id: "2",
       icon: "M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z",
       title: "Fast",
       description:
         "Magna lacus iaculis elit, quis pharetra varius. Aenean lectus ex, placerat id tellus in eros.",
     },
     {
+      id: "3",
       icon: "M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z",
       title: "Shipping All Around The World",
       description:
         " Pellentesque varius ex vel consequat quis. Sed mauris ex, imperdiet sit amet nisl ac, ultrices.",
     },
     {
+      id: "4",
       icon: "M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z",
       title: "Easy Payment",
       description:
@@ -44,7 +48,7 @@ const ContentTab1 = () => {
           <div className="grow-0 shrink-0 basis-auto w-full lg:w-8/12 xl:mb-6 mb-md-0 px-3">
             <div className="flex flex-wrap">
               {ChooseUs.map((item) => (
-                <div className="grow-0 shrink-0 basis-auto w-full lg:w-6/12 mb-12">
+                <div className="grow-0 shrink-0 basis-auto w-full lg:w-6/12 mb-12" key={item.id}>
                   <div className="flex">
                     <div className="shrink-0 mt-1">
                       <svg

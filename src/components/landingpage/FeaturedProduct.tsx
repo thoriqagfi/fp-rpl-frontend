@@ -5,18 +5,21 @@ import { TbShoppingCartPlus } from "react-icons/tb";
 const FeaturedProduct = () => {
   const Product1 = [
     {
+      id: "1",
       src: "/hoodieee.png",
       alt: "Hoodie",
       title: "Hoodie",
       productCount: "1.000+ Product",
     },
     {
+      id: "2",
       src: "/shirtttt.png",
       alt: "Shirt",
       title: "Shirt",
       productCount: "1.000+ Product",
     },
     {
+      id: "3",
       src: "/hattt.png",
       alt: "Hat",
       title: "Hat",
@@ -26,24 +29,28 @@ const FeaturedProduct = () => {
 
   const Product2 = [
     {
+      id: "1",
       src: "/lanyard.png",
       alt: "Lanyard",
       title: "Lanyard",
       productCount: "1.000+ Product",
     },
     {
+      id: "2",
       src: "/tumbler.png",
       alt: "Tumbler",
       title: "Tumbler",
       productCount: "1.000+ Product",
     },
     {
+      id: "3",
       src: "/Sticker.png",
       alt: "Sticker",
       title: "Sticker",
       productCount: "1.000+ Product",
     },
     {
+      id: "4",
       src: "/Mug.png",
       alt: "Mug",
       title: "Mug",
@@ -59,7 +66,7 @@ const FeaturedProduct = () => {
             <h2 className="text-3xl font-bold sm:text-5xl">Featured Product</h2>
             <p className="text-xl mt-4 ml-1 sm:text-2xl">
               <a
-                href="/"
+                href="#"
                 aria-label=""
                 className="group inline-flex items-center text-blue-800"
               >
@@ -96,7 +103,7 @@ const FeaturedProduct = () => {
           </div>
           <div className="flex xl:flex-row flex-col">
             {Product1.map((item) => (
-              <div className="w-80 p-2 mx-2 mb-5 bg-white rounded-xl shadow-lg hover:shadow-2xl">
+              <div className="w-80 p-2 mx-2 mb-5 bg-white rounded-xl shadow-lg hover:shadow-2xl" key={item.id}>
                 <Image
                   className="h-60 object-contain rounded-xl transition-transform duration-300 hover:transform hover:scale-105"
                   src={item.src}
@@ -120,7 +127,7 @@ const FeaturedProduct = () => {
           </div>
           <div className="flex xl:flex-row flex-col">
             {Product2.map((item) => (
-              <div className="w-80 p-2 mx-2 mb-5 bg-white rounded-xl shadow-lg hover:shadow-2xl">
+              <div className="w-80 p-2 mx-2 mb-5 bg-white rounded-xl shadow-lg hover:shadow-2xl" key={item.id}>
                 <Image
                   className="h-60 object-contain rounded-xl transition-transform duration-300 hover:transform hover:scale-105"
                   src={item.src}

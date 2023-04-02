@@ -3,6 +3,7 @@ import Image from "next/image";
 
 const Trending = [
   {
+    id : "1",
     name: "Puma Cali Sneaker",
     price: "Rp.1.250.000",
     discountPrice: "Rp.1.500.000",
@@ -10,6 +11,7 @@ const Trending = [
     image2: "/puma1.png",
   },
   {
+    id : "2",
     name: "Schematics Hoodie",
     price: "Rp.3.250.000",
     discountPrice: "Rp.3.500.000",
@@ -28,7 +30,7 @@ const HottestProduct = () => {
               Trending Products Of The Week
             </h4>
             <p className="text-center md:text-left text-white opacity-70 md:pb-6">
-              Get Your Hands on This Week's Hottest Trending Products - Shop
+              Get Your Hands on This Weeks Hottest Trending Products - Shop
               Now!
             </p>
           </div>
@@ -106,7 +108,7 @@ const HottestProduct = () => {
             <div className="flex flex-wrap xl:flex-col xl:gap-8 mt-8">
               <div className="flex flex-row mx-auto xl:mr-8 xl:ml-0 xl:flex-row gap-5 justify-center">
                 {Trending.map((Trending) => (
-                  <div className="group xl:my-10 mx-auto flex xl:w-full flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+                  <div className="group xl:my-10 mx-auto flex xl:w-full flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md" key={Trending.id}>
                     <a
                       className="relative mx-3 mt-3 flex h-32 w-3/3 xl:h-60 xl:w-11/12  rounded-xl"
                       href="#"

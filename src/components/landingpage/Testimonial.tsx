@@ -2,18 +2,21 @@ import React from "react";
 
 const testi = [
   {
+    id: "1",
     name: "Jacob Jones",
     profession: "Youtube Personality",
     shortcomment: "Absolutely recommended!",
     longcomment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium dolores facere repellendus, velit quis fugiat.",
   },
   {
+    id: "2",
     name: "James Khawalski",
     profession: "CEO, Mavoline",
     shortcomment: "Saved me 1000s of hours!",
     longcomment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium dolores facere repellendus, velit quis fugiat.",
   },
   {
+    id: "3",
     name: "Jenny Wilson",
     profession: "Esports Commentator",
     shortcomment: "Service was amazing!!",
@@ -37,7 +40,7 @@ const Testimonial = () => {
 
           <div className="relative mx-auto xl:mt-20 mt-10 grid max-w-lg grid-cols-1 gap-6 md:max-w-none md:grid-cols-3 xl:gap-10">
             {testi.map((t) => (
-              <div className="flex flex-col rounded-xl border border-blue-600 text-center shadow-xl shadow-blue-200">
+              <div className="flex flex-col rounded-xl border border-blue-600 text-center shadow-xl shadow-blue-200" key={t.id}>
                 <div className="relative flex flex-1 flex-col justify-between p-6 lg:py-7 lg:px-5">
                   <span className="absolute -left-5 -top-6 rounded-full border border-blue-600 bg-white p-3 text-5xl">
                     <svg
