@@ -25,7 +25,7 @@ const AuthStore = create<AuthStore>((set) => ({
     );
   },
   logout: () => {
-    removeToken('token');
+    removeToken();
     set(
       produce<AuthStore>((state) => {
         state.isAuthenticated = false;
