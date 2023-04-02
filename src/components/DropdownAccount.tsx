@@ -13,9 +13,6 @@ type ButtonDropdownType = {
 
 export default function DropdownsAccount() {
   const { logout, user, isAuthenticated } = useAuthStore();
-  if(!user?.token) {
-    isAuthenticated && logout();
-  }
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -48,7 +45,9 @@ export default function DropdownsAccount() {
     {
       key: '4',
       label: (
-        <Link href={'/'} onClick={() => logout()}>
+        <Link href={'/'} onClick={() => {
+          logout()
+        }}>
           Logout
         </Link>
       ),
