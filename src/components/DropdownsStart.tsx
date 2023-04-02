@@ -1,27 +1,23 @@
 import React from 'react';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
-
-type ButtonDropdownType = {
-  className: string;
-  title: string;
-};
+import Link from 'next/link';
 
 const items: MenuProps['items'] = [
   {
     key: '1',
     label: (
-      <a target="_blank" href="#">
+      <Link href={'/register'}>
         Register
-      </a>
+      </Link>
     ),
   },
   {
     key: '2',
     label: (
-      <a target="_blank" href="#">
+      <Link href={'/login'}>
         Login
-      </a>
+      </Link>
     ),
   },
 ];

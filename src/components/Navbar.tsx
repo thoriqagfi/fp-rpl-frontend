@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import DropdownsStart from "./DropdownsStart";
 import DropdownsAccount from "./DropdownAccount";
+import useAuthStore from "@/store/AuthStore";
 
 type NavbarItems = {
   name: string;
@@ -34,9 +35,9 @@ const Menu: NavbarItems[] = [
 ]
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const { logout, user, isAuthenticated } = useAuthStore();
+  
   return (
-    
 <nav className="bg-white px-2 sm:px-4 py-1.5 fixed w-full z-20 top-0 left-0 border-b border-gray-200">
   <div className="container flex flex-wrap items-center justify-between mx-auto">
       <div className="flex items-center">
@@ -53,7 +54,7 @@ const Navbar = () => {
       <div className="flex md:order-2">
         <div>
           {
-            isLoggedIn ? (
+            user !== null && isAuthenticated == true ? (
               <DropdownsAccount/>
             ) : (
               <DropdownsStart/>
