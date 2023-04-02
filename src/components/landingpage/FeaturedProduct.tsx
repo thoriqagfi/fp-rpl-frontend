@@ -44,14 +44,14 @@ const FeaturedProduct = () => {
     },
     {
       id: "3",
-      src: "/Sticker.png",
+      src: "/sticker.png",
       alt: "Sticker",
       title: "Sticker",
       productCount: "1.000+ Product",
     },
     {
       id: "4",
-      src: "/Mug.png",
+      src: "/mug.png",
       alt: "Mug",
       title: "Mug",
       productCount: "1.000+ Product",
