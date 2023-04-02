@@ -2,6 +2,9 @@ import * as React from 'react';
 import Checkbox from '@/components/input/Checkbox';
 import Image from 'next/image';
 import { AiFillStar } from 'react-icons/ai';
+import { useQuery } from '@tanstack/react-query';
+import { apiMock } from '@/lib/apiMock';
+import { RoleType, User } from '@/types/user';
 
 interface FilterProps {
   label: string;
@@ -23,35 +26,67 @@ const Filter: FilterProps[] = [
   },
 ]
 
+interface Category {
+  id?: number;
+  label?: string;
+}
+
 interface Product {
-  name: string;
+  id: number;
+  product_name: string;
   description: string;
-  category: string;
-  stocks: number;
+  stock: number;
   price: number;
-  location: string;
-  rating: number;
-  image?: string;
-  seller: string;
+  category: Category;
+  category_id: number;
+  likes: number | null;
+  review: string | null;
+  user: User | null;
 }
 
 const Product: Product[] = [
   {
-    name: 'Kaos',
+    id: 1,
+    product_name: 'Kaos',
     description: 'Kaos keren',
-    category: 'pakaian',
-    stocks: 10,
+    stock: 10,
     price: 10000,
-    location: 'Jakarta',
-    rating: 4.1,
-    image: '/4k.jpg',
-    seller: 'Toko A',
+    category: {
+      id: 1,
+      label: 'pakaian',
+    },
+    category_id: 1,
+    likes: 10,
+    review: 'mantap',
+    user: {
+      id: 1,
+      first_name: 'Rizky',
+      last_name: 'Rizky',
+      email: '',
+      no_telp: '',
+      city: '',
+      role: RoleType.SELLER,
+      address: '',
+      password: '',
+    }
   },
 ]
 
 export default function Products() {
   const [checked, setChecked] = React.useState<string>('');
   const [search, setSearch] = React.useState<string>('');
+
+  const { data, isLoading, isError} = useQuery(['products'], async () => {
+    const res = await apiMock.get(`https://fp-rpl-backend-api-production.up.railway.app`)
+    return res.data
+  })
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  if (isError) {
+    return <div>Error...</div>
+  }
   return (
     <>
     <div className="bg-white text-black min-h-screen min-w-full px-20 py-20">
