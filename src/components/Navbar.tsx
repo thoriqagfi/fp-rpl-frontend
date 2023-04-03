@@ -42,7 +42,7 @@ const Navbar = () => {
   <div className="container flex flex-wrap items-center justify-between mx-auto">
       <div className="flex items-center">
         <Image src="/shop.png" className="h-12 mr-3 sm:h-12" alt="logo" height={40} width={50}/>
-        <span className="self-center text-xl font-semibold whitespace-nowrap hidden sm:inline">Ecommerce</span>
+        <span className="self-center text-xl font-semibold whitespace-nowrap hidden sm:inline text-black">Ecommerce</span>
         <div className="lg:ml-4 md:ml-4 sm:ml-0">
         <div className="relative pt-1">
           <div className="absolute inset-y-0 left-0 pt-1 flex items-center pl-3 pointer-events-none">
