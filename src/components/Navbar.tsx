@@ -63,7 +63,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="items-center justify-center hidden w-full mr-32 md:flex md:w-auto md:order-1" id="navbar-sticky">
-        <ul className="flex flex-col p-4 mt-4 mr-10 border border-gray-100 rounded-lg mx-auto bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
+        <ul className="flex flex-col p-4 mt-4 mr-24 border border-gray-100 rounded-lg mx-auto bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
           {
             Menu.map(({name, href, current}, index) => (
               <li key={index}>

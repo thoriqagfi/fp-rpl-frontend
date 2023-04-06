@@ -19,7 +19,7 @@ const Tabs = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="bg-white my-10 mx-12 flex px-6 py-10 md:px-12 text-gray-800 text-center lg:text-left rounded-3xl mt-20">
+    <div className="bg-white mx-12 flex px-6 py-10 md:px-12 text-gray-800 text-center lg:text-left rounded-3xl mt-20">
       <div className="flex flex-col w-1/5 border-r">
         <button
           className={`py-4 px-0 flex justify-center ${

@@ -92,7 +92,7 @@ export default function Home() {
       </Head>
       <Layout>
       <section className='bg-gray-100'>
-        <main className="bg-gray-100 pt-28">
+        <main className="bg-gray-100 pt-14">
           <section>
             <div className=" bg-blue-400 xl:mx-10 xl:my-4 rounded-b-3xl xl:rounded-3xl">
               <div className="mx-auto h-full py-5 md:pt-8 pb-24 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
@@ -174,7 +174,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute top-24 right-5 xl:top-16 xl:right-32 floating">
+                  <div className="absolute top-36 right-5 xl:top-28 xl:right-40 floating">
                     <Image
                       className="mx-auto ml-10 2xl:-mb-14 pb-5 relative z-0 transition-transform duration-300 hover:transform hover:scale-110"
                       alt="img"
@@ -204,7 +204,7 @@ export default function Home() {
             <Testimonial />
           </section>
 
-          <section className="hidden xl:block">
+          <section className="hidden xl:block pb-10">
             <Tabs />
           </section>
 
