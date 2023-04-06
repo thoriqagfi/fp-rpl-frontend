@@ -2,12 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-import ListSideBar from "@/components/ListSideBar";
-import DropDownSidebar from "@/components/DropdownSidebar";
-import ListAdminProfile from "@/components/ListAdminProfile";
+import ListSideBar from "@/components/dashboardadmin/ListSideBar";
+import DropDownSidebar from "@/components/dashboardadmin/DropdownSidebar";
+import ListAdminProfile from "@/components/dashboardadmin/ListAdminProfile";
 
-import { AiFillAppstore, AiTwotoneShop } from "react-icons/ai";
-import { BsFillBagCheckFill } from "react-icons/bs";
+import {
+  AiFillAppstore,
+  AiTwotoneShop,
+  AiOutlineShop,
+  AiOutlineShopping,
+} from "react-icons/ai";
+import { BsFillBagCheckFill, BsFilterRight, BsPeople } from "react-icons/bs";
 import { FaUserCircle, FaCrown } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -18,7 +23,7 @@ import { TbNotes } from "react-icons/tb";
 import UserProfile from "public/user-profile.jpeg";
 import PlayStore from "public/playstore.png";
 
-function Admin() {
+function DashbaordAdmin() {
   const [open, setOpenDropdown] = useState(false);
   const [showSideBar, setShowSideBar] = useState(true);
   const [showProfile, setShowProfile] = useState(false);
@@ -31,7 +36,7 @@ function Admin() {
             <div className="flex items-center justify-start">
               <button
                 onClick={() => setShowSideBar(!showSideBar)}
-                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center p-1 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               >
                 <span className="sr-only">Open sidebar</span>
                 <HiMenuAlt2 className="w-6 h-6" />
@@ -146,11 +151,182 @@ function Admin() {
         </div>
       </aside>
 
-      <div className="p-4 sm:ml-64 bg-blue-200">
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14"></div>
+      <div className="p-4 sm:ml-64 bg-gray-200 min-h-screen">
+        <div className="p-4 mt-14">
+          <div className="grid grid-cols-2 grid-rows-2 lg:grid-rows-1 lg:grid-cols-4 gap-4">
+            <span className="flex items-center justify-center h-24 rounded-md bg-white shadow-lg">
+              <AiOutlineShopping className="fill-orange-600 w-1/2 h-1/2" />
+              <span className="w-full h-full text-gray-900 flex flex-col items-start justify-center px-4">
+                <h4 className="text-sm">Total Sales</h4>
+                <h2 className="text-xl">Rp 3.198.000,-</h2>
+              </span>
+            </span>
+            <span className="flex items-center justify-center h-24 rounded-md bg-white shadow-lg">
+              <AiOutlineShop className="fill-purple-600 w-1/2 h-1/2" />
+              <span className="w-full h-full text-gray-900 flex flex-col items-start justify-center px-4">
+                <h4 className="text-sm">Total Expenses</h4>
+                <h2 className="text-xl">Rp 2.709.000,-</h2>
+              </span>
+            </span>
+            <span className="flex items-center justify-center h-24 rounded-md bg-white shadow-lg">
+              <BsPeople className="fill-blue-600 w-5/12 h-[41.67%]" />
+              <span className="w-full h-full text-gray-900 flex flex-col items-start justify-center px-4">
+                <h4 className="text-sm">Total Visitors</h4>
+                <h2 className="text-xl">Rp 3.198.000,-</h2>
+              </span>
+            </span>
+            <span className="flex items-center justify-center h-24 rounded-md bg-white shadow-lg">
+              <BsFilterRight className="fill-green-600 w-1/2 h-1/2" />
+              <span className="w-full h-full text-gray-900 flex flex-col items-start justify-center px-4">
+                <h4 className="text-sm">Total Order</h4>
+                <h2 className="text-xl">Rp 3.198.000,-</h2>
+              </span>
+            </span>
+          </div>
+
+          <div className="mt-8 h-full w-full rounded-lg bg-red-50 text-black relative overflow-x-auto shadow-lg">
+            <table className="w-full h-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Product name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Color
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Price
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Apple MacBook Pro 17
+                  </th>
+                  <td className="px-6 py-4">Silver</td>
+                  <td className="px-6 py-4">Laptop</td>
+                  <td className="px-6 py-4">$2999</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Microsoft Surface Pro
+                  </th>
+                  <td className="px-6 py-4">White</td>
+                  <td className="px-6 py-4">Laptop PC</td>
+                  <td className="px-6 py-4">$1999</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Magic Mouse 2
+                  </th>
+                  <td className="px-6 py-4">Black</td>
+                  <td className="px-6 py-4">Accessories</td>
+                  <td className="px-6 py-4">$99</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Google Pixel Phone
+                  </th>
+                  <td className="px-6 py-4">Gray</td>
+                  <td className="px-6 py-4">Phone</td>
+                  <td className="px-6 py-4">$799</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Magic Mouse 2
+                  </th>
+                  <td className="px-6 py-4">Black</td>
+                  <td className="px-6 py-4">Accessories</td>
+                  <td className="px-6 py-4">$99</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Google Pixel Phone
+                  </th>
+                  <td className="px-6 py-4">Gray</td>
+                  <td className="px-6 py-4">Phone</td>
+                  <td className="px-6 py-4">$799</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default Admin;
+export default DashbaordAdmin;
