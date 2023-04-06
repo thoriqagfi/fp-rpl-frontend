@@ -1,10 +1,13 @@
 import * as React from 'react';
+import Link from 'next/link';
 import Checkbox from '@/components/input/Checkbox';
 import Image from 'next/image';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 import { useQuery } from '@tanstack/react-query';
 import { apiMock } from '@/lib/apiMock';
 import { RoleType, User } from '@/types/user';
+import { useRouter } from 'next/router';
+import { Product } from '@/types/products';
 
 interface FilterProps {
   label: string;
@@ -26,59 +29,43 @@ const Filter: FilterProps[] = [
   },
 ]
 
-interface Category {
-  id?: number;
-  label?: string;
-}
-
-interface Product {
-  id: number;
-  product_name: string;
-  description: string;
-  stock: number;
-  price: number;
-  category: Category;
-  category_id: number;
-  likes: number | null;
-  review: string | null;
-  user: User | null;
-}
-
-const Product: Product[] = [
-  {
-    id: 1,
-    product_name: 'Kaos',
-    description: 'Kaos keren',
-    stock: 10,
-    price: 10000,
-    category: {
-      id: 1,
-      label: 'pakaian',
-    },
-    category_id: 1,
-    likes: 10,
-    review: 'mantap',
-    user: {
-      id: 1,
-      first_name: 'Rizky',
-      last_name: 'Rizky',
-      email: '',
-      no_telp: '',
-      city: '',
-      role: RoleType.SELLER,
-      address: '',
-      password: '',
-    }
-  },
-]
+// const Product: Product[] = [
+//   {
+//     id: 1,
+//     product_name: 'Kaos',
+//     description: 'Kaos keren',
+//     stock: 10,
+//     price: 10000,
+//     category: {
+//       id: 1,
+//       label: 'pakaian',
+//     },
+//     category_id: 1,
+//     likes: 10,
+//     review: 'mantap',
+//     user: {
+//       id: 1,
+//       first_name: 'Rizky',
+//       last_name: 'Rizky',
+//       email: '',
+//       no_telp: '',
+//       city: '',
+//       role: RoleType.SELLER,
+//       address: '',
+//       password: '',
+//     }
+//   },
+// ]
 
 export default function Products() {
   const [checked, setChecked] = React.useState<string>('');
   const [search, setSearch] = React.useState<string>('');
-
-  const { data, isLoading, isError} = useQuery(['products'], async () => {
+  const router = useRouter();
+  const { data, isLoading, isError}  = useQuery<Product[]>(
+    ['products'],
+    async () => {
     const res = await apiMock.get(`https://fp-rpl-backend-api-production.up.railway.app`)
-    return res.data
+    return res.data.data
   })
 
   if (isLoading) {
@@ -125,44 +112,42 @@ export default function Products() {
         {/* Product */}
         <div className='flex flex-wrap md:gap-10 mx-auto'>
           {
-            Product.map(({
-              name,
+            data.map(({
+              id,
+              product_name,
               description,
-              category,
-              stocks,
+              stock,
               price,
-              location,
-              rating,
-              image,
-              seller
+              category,
+              category_id,
+              likes,
+              wish_count,
+              review,
+              user,
+              user_id,
             }, key) => {
               if (
-                (search == '' || name.toLowerCase().includes(search.toLowerCase()) || seller.toLowerCase().includes(search.toLowerCase())) &&
-                checked == '' || category.toLowerCase() == checked.toLowerCase()
+                (search == '' || product_name.toLowerCase().includes(search.toLowerCase()) || user?.first_name.concat(" ", user?.last_name).toLowerCase().includes(search.toLowerCase())) &&
+                checked == '' || category.label?.toLowerCase() == checked.toLowerCase()
               )
               return (
-                <div key={key} className='rounded-md shadow-xl hover:scale-105 ease-in-out transition duration:150 cursor-pointer'>
-                  <Image
-                    src={`${image}`}
-                    alt={name}
-                    width={200}
-                    height={200}
-                    className='rounded-t-md object-fill h-[200px] w-[200px]'
-                  />
-                  <div className='mx-2 mb-3 mt-2'>
-                    <p className='font-normal text-sm text-gray-500'>{seller}</p>
-                    <h3 className='text-base'>{name}</h3>
-                    <p className='font-bold text-lg'>Rp{price}</p>
-                    <p className='font-normal text-sm text-gray-500'>{location}</p>
-                    <div className='flex justify-between items-center'>
-                      <div className='flex items-center gap-x-1'>
-                        <AiFillStar className='text-yellow-400'/>
-                        <p className='font-normal text-sm text-gray-500'>{rating}</p>
+                <Link href={`/products/${id}`}>
+                  <div key={key} className='rounded-md shadow-xl hover:scale-105 ease-in-out transition duration:150 cursor-pointer w-80 pt-2'>
+                    <div className='mx-4 my-5'>
+                      <h3 className='text-lg font-medium'>{product_name}</h3>
+                      <p className='font-normal text-sm text-gray-500 pb-2'>{user?.first_name + " " + user?.last_name}</p>
+                      <p className='font-bold text-lg'>Rp{price}</p>
+                      {/* <p className='font-normal text-sm text-gray-500'>{location}</p> */}
+                      <div className='flex justify-between items-center pt-5 pb-2'>
+                        <div className='flex items-center gap-x-1'>
+                          <AiFillHeart className='text-red-400'/>
+                          <p className='font-normal text-sm text-gray-500'>{wish_count}</p>
+                        </div>
+                        <p className='font-normal text-xs text-gray-500'>Stocks : {stock}</p>
                       </div>
-                      <p className='font-normal text-xs text-gray-500'>Stocks : {stocks}</p>
                     </div>
                   </div>
-                </div>
+                </Link>
             )})
           }
         </div>
