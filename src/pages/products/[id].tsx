@@ -43,7 +43,7 @@ export default function ProductsDetail() {
   return (
     <>
       <Layout>
-        <div className="bg-white py-32">
+        <div className="bg-white py-32 text-black">
           <h1 className="text-center font-bold italic text-3xl mb-10">Products Detail</h1>
           <div className="border border-black rounded-lg shadow-lg w-2/3 mx-auto">
             <div className="my-10 mx-10 gap-x-2 grid grid-cols-2">

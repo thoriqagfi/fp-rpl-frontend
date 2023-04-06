@@ -8,6 +8,7 @@ import { apiMock } from '@/lib/apiMock';
 import { RoleType, User } from '@/types/user';
 import { useRouter } from 'next/router';
 import { Product } from '@/types/products';
+import Loading from '@/components/Loading';
 
 interface FilterProps {
   label: string;
@@ -16,16 +17,16 @@ interface FilterProps {
 
 const Filter: FilterProps[] = [
   {
-    label: 'Pakaian',
-    value: 'pakaian',
+    label: 'Consumer Electronic Goods',
+    value: 'Consumer Electronic Goods',
   },
   {
-    label: 'Teknologi',
-    value: 'teknologi',
+    label: 'Pets & Pet Supplies',
+    value: 'Pets & Pet Supplies',
   },
   {
-    label: 'Makanan',
-    value: 'makanan',
+    label: 'Children & Infants',
+    value: 'Children & Infants',
   },
 ]
 
@@ -69,7 +70,7 @@ export default function Products() {
   })
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading/>
   }
   if (isError) {
     return <div>Error...</div>
