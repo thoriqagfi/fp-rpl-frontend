@@ -13,6 +13,7 @@ import useAuthStore from "@/store/AuthStore";
 
 export default function ProductsDetail() {
   const { user, isAuthenticated } = useAuthStore()
+  const [product, setProduct] = React.useState<Product>()
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, error } = useQuery<Product>({
@@ -28,6 +29,12 @@ export default function ProductsDetail() {
   const handleCart = () => {
     if(!isAuthenticated) return router.push('/login')
     else {
+      // addCart({
+      //   id: data?.id,
+      //   product_name: data?.product_name,
+      //   price: data?.price,
+
+      // })
       axios.post(`https://fp-rpl-backend-api-production.up.railway.app/cart`, {
         user_id: user?.id,
         product_id: data?.id
@@ -38,6 +45,7 @@ export default function ProductsDetail() {
       .catch(err => {
         console.log(err)
       })
+
     }
   }
   return (

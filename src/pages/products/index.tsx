@@ -75,6 +75,16 @@ export default function Products() {
   if (isError) {
     return <div>Error...</div>
   }
+
+  const formatRupiah = (number: number) => {
+    const rupiah = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(number);
+  
+    return rupiah;
+  };
   return (
     <>
     <div className="bg-white text-black min-h-screen min-w-full px-20 py-20">
@@ -137,7 +147,7 @@ export default function Products() {
                     <div className='mx-4 my-5'>
                       <h3 className='text-lg font-medium'>{product_name}</h3>
                       <p className='font-normal text-sm text-gray-500 pb-2'>{user?.first_name + " " + user?.last_name}</p>
-                      <p className='font-bold text-lg'>Rp{price}</p>
+                      <p className='font-bold text-lg'>{formatRupiah(price)}</p>
                       {/* <p className='font-normal text-sm text-gray-500'>{location}</p> */}
                       <div className='flex justify-between items-center pt-5 pb-2'>
                         <div className='flex items-center gap-x-1'>

@@ -15,12 +15,12 @@ export interface Product {
   user_id: number;
 }
 
-interface Category {
+export interface Category {
   id?: number;
   label?: string;
 }
 
-interface Review {
+export interface Review {
   id?: number;
   user_id?: number;
   product_id?: number;
