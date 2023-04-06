@@ -1,23 +1,15 @@
 import * as React from 'react'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import LandingPage from '@/components/landingpage/LandingPage'
-import { AppProps } from 'next/app'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 import useAuthStore from '@/store/AuthStore'
 import { getToken, removeToken } from '@/lib/token'
 import { apiMock } from '@/lib/apiMock'
-import PrivateRoute from '@/routes/PrivateRoute'
 
 import Loading from '@/components/Loading'
-import Admin from './dashboard/admin'
 
-export default function Home({
-  Component,
-  pageProps
-}: AppProps) {
+export default function Home() {
   const router =  useRouter();
   const { user, login, logout, isAuthenticated, isLoading, stopLoading } = useAuthStore();
   const checkUser = React.useCallback(() => {
@@ -76,7 +68,7 @@ export default function Home({
   //   }
   // }, [isLoading, isAuthenticated, user, router])
 
-  if(isLoading) {
+  if(isLoading && !isAuthenticated) {
     return <Loading />
   }
 
@@ -86,20 +78,12 @@ export default function Home({
       {/* <BrowserRouter>
         <Routes>
           <Route index path="/" element={<LandingPage/>} />
-          <Route
-            path="/dashboard/admin/*"
-            element={
-              <PrivateRoute role='admin' >
-                <Admin />
-              </PrivateRoute>
-            }
-          />
-          <PrivateRoute path="/dashboard/admin/*" Component={<Component {...pageProps}/>} role="admin" />
-          <PrivateRoute path="/dashboard/seller/*" Component={<Component {...pageProps}/>} role="seller" />
-          <PrivateRoute path="/dashboard/customer/*" Component={<Component {...pageProps}/>} role="customer" />
+          <Route path="/admin" element={<Admin/>} />
+          <PrivateRoute path="/dashboard/seller/*" element={<Component {...pageProps}/>} role="seller" />
+          <PrivateRoute path="/dashboard/customer/*" element={<Component {...pageProps}/>} role="customer" />
 
-        </Routes> */}
-      {/* </BrowserRouter> */}
+        </Routes>
+       </BrowserRouter> */}
     </>
   )
 }

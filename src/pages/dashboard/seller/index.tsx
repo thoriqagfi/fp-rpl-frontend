@@ -1,28 +1,54 @@
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import ListSideBar from "@/components/ListSideBar";
 import DropDownSidebar from "@/components/DropdownSidebar";
 import ListAdminProfile from "@/components/ListAdminProfile";
+import useAuthStore from "@/store/AuthStore";
+import { Auth } from "@/components/auth/Auth";
 
-import { AiFillAppstore, AiTwotoneShop } from "react-icons/ai";
-import { BsFillBagCheckFill } from "react-icons/bs";
-import { FaUserCircle, FaCrown } from "react-icons/fa";
+import { AiTwotoneShop } from "react-icons/ai";
 import { HiMenuAlt2 } from "react-icons/hi";
+import { BiLogOut } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
+import { RiDashboardFill } from "react-icons/ri";
 import { MdOutlineHelp, MdOutlineSpaceDashboard } from "react-icons/md";
-import { RiInboxArchiveFill } from "react-icons/ri";
-import { TbNotes } from "react-icons/tb";
 
 import UserProfile from "public/user-profile.jpeg";
 import PlayStore from "public/playstore.png";
-import { NextComponentType } from "next";
+import { getToken, removeToken } from "@/lib/token";
+import { apiMock } from "@/lib/apiMock";
+import Loading from "@/components/Loading";
+import WithAuth from "@/components/auth/withAuth";
 
-export default function Admin() {
+
+import AddProductCard from "@/components/DashboardSeller/AddProductCard";
+
+export default function Seller() {
+  const router = useRouter();
+  WithAuth();
   const [open, setOpenDropdown] = React.useState(false);
   const [showSideBar, setShowSideBar] = React.useState(true);
   const [showProfile, setShowProfile] = React.useState(false);
+
+  const { user, logout, isLoading } = useAuthStore();
+  const { data, isLoading: isLoadingProduct } = useQuery(["products"], async () => {
+    const res = await apiMock.get("https://fp-rpl-backend-api-production.up.railway.app");
+    return res.data.data;
+  })
+  
+  if(isLoading) return <Loading />
+
+  // React.useEffect(() => {
+  //   console.log(data)
+  //   if(!user) {
+  //     window.location.href = '/login';
+  //   }
+  // }, [data, user])
+
 
   return (
     <div className="min-h-screen w-full">
@@ -37,14 +63,12 @@ export default function Admin() {
                 <span className="sr-only">Open sidebar</span>
                 <HiMenuAlt2 className="w-6 h-6" />
               </button>
-              <Link href="#" className="flex ml-2 md:mr-24">
-                <Image
-                  src={PlayStore}
-                  className="h-8 w-8 mr-3"
-                  alt="Company Logo"
+              <Link href="/" className="flex ml-2 md:mr-24 gap-x-2 items-center">
+                <RiDashboardFill
+                  className="w-6 h-6 text-gray-800 dark:text-gray-200"
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                  FP RPL
+                  {user?.role.toUpperCase()} ACCOUNT
                 </span>
               </Link>
             </div>
@@ -72,17 +96,20 @@ export default function Admin() {
                 >
                   <div className="px-4 py-3" role="none">
                     <p className="text-sm text-gray-900 dark:text-white">
-                      Neil Sims
+                      {user?.first_name + " " + user?.last_name}
                     </p>
                     <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300">
-                      neil.sims@fp-rpl.com
+                      {user?.email}
                     </p>
                   </div>
                   <ul className="py-1" role="none">
                     <ListAdminProfile href="#" name="Dashboard" />
                     <ListAdminProfile href="#" name="Settings" />
                     <ListAdminProfile href="#" name="Earnings" />
-                    <ListAdminProfile href="#" name="Sign Out" />
+                    <ListAdminProfile href="/" name="Sign Out" onClick={() => {
+                      router.push('/')
+                      logout();
+                    }}/>
                   </ul>
                 </div>
               </div>
@@ -111,6 +138,7 @@ export default function Admin() {
                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                 aria-controls="dropdown-example"
                 data-collapse-toggle="dropdown-example"
+                onClick={() => setOpenDropdown(!open)}
               >
                 <AiTwotoneShop />
                 <span
@@ -120,7 +148,6 @@ export default function Admin() {
                   E-commerce
                 </span>
                 <IoIosArrowDown
-                  onClick={() => setOpenDropdown(!open)}
                   className={`duration-300 ${open ? "rotate-180" : "rotate-0"}`}
                 />
               </button>
@@ -133,22 +160,25 @@ export default function Admin() {
                 <DropDownSidebar name="Invoice" />
               </ul>
             </li>
-            <ListSideBar href="#" icon={AiFillAppstore} name="Kanban" />
-            <ListSideBar href="#" icon={RiInboxArchiveFill} name="Inbox" />
-            <ListSideBar href="#" icon={FaUserCircle} name="Users" />
-            <ListSideBar href="#" icon={BsFillBagCheckFill} name="Products" />
           </ul>
 
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
-            <ListSideBar href="#" icon={FaCrown} name="Upgrade to Pro" />
-            <ListSideBar href="#" icon={TbNotes} name="Documentation" />
-            <ListSideBar href="#" icon={MdOutlineHelp} name="Help" />
+            <ListSideBar href={'/'} onClick={() => {logout()}} icon={BiLogOut} name="Logout" />
           </ul>
         </div>
       </aside>
 
-      <div className="p-4 sm:ml-64 bg-blue-200">
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14"></div>
+      <div className="p-4 sm:ml-64 min-h-screen bg-white pt-36 pl-20 text-black">
+        <h1 className="text-3xl font-bold pb-5">Add Product</h1>
+        {
+          data?.map((data: any, key: number) => {
+            return (
+              <div key={key}>
+                <AddProductCard data={data}/>
+              </div>
+            )
+          })
+        }
       </div>
     </div>
   );

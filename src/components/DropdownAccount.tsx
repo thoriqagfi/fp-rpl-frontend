@@ -29,7 +29,7 @@ export default function DropdownsAccount() {
     {
       key: '2',
       label: (
-        <Link href={'#'}>
+        <Link href={`/dashboard/${user?.role}`}>
           Dashboard
         </Link>
       ),

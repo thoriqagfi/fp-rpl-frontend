@@ -5,7 +5,7 @@ function ListSideBar(props: ListSideBarProps) {
   return (
     <li>
       <Link
-        href={props.href}
+        href={`${props.href}`}
         className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group"
       >
         {<props.icon />}
