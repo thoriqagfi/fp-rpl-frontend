@@ -11,6 +11,7 @@ import {
   AiTwotoneShop,
   AiOutlineShop,
   AiOutlineShopping,
+  AiOutlineClockCircle,
 } from "react-icons/ai";
 import { BsFillBagCheckFill, BsFilterRight, BsPeople } from "react-icons/bs";
 import { FaUserCircle, FaCrown } from "react-icons/fa";
@@ -25,6 +26,7 @@ import PlayStore from "public/playstore.png";
 
 function DashbaordAdmin() {
   const [open, setOpenDropdown] = useState(false);
+  const [openTime, setOpenTime] = useState(false);
   const [showSideBar, setShowSideBar] = useState(true);
   const [showProfile, setShowProfile] = useState(false);
 
@@ -172,19 +174,146 @@ function DashbaordAdmin() {
               <BsPeople className="fill-blue-600 w-5/12 h-[41.67%]" />
               <span className="w-full h-full text-gray-900 flex flex-col items-start justify-center px-4">
                 <h4 className="text-sm">Total Visitors</h4>
-                <h2 className="text-xl">Rp 3.198.000,-</h2>
+                <h2 className="text-xl">2023</h2>
               </span>
             </span>
             <span className="flex items-center justify-center h-24 rounded-md bg-white shadow-lg">
               <BsFilterRight className="fill-green-600 w-1/2 h-1/2" />
               <span className="w-full h-full text-gray-900 flex flex-col items-start justify-center px-4">
                 <h4 className="text-sm">Total Order</h4>
-                <h2 className="text-xl">Rp 3.198.000,-</h2>
+                <h2 className="text-xl">1717</h2>
               </span>
             </span>
           </div>
 
-          <div className="mt-8 h-full w-full rounded-lg bg-red-50 text-black relative overflow-x-auto shadow-lg">
+          <div className="mt-8 flex items-center justify-between pb-4">
+            <div>
+              <button
+                id="dropdownRadioButton"
+                className="inline-flex gap-2 items-center text-gray-500 bg-white border border-gray-300 hover:bg-gray-100  font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600"
+                type="button"
+              >
+                <AiOutlineClockCircle />
+                Last 30 days
+                <IoIosArrowDown
+                  onClick={() => setOpenTime(!openTime)}
+                  className={`duration-300 ${
+                    openTime ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </button>
+              {/* <!-- Dropdown menu --> */}
+              <div
+                id="dropdownRadio"
+                className={`z-10 absolute ${
+                  openTime ? "block" : "hidden"
+                } w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+              >
+                <ul
+                  className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownRadioButton"
+                >
+                  <li>
+                    <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                      <input
+                        id="filter-radio-example-1"
+                        type="radio"
+                        value=""
+                        name="filter-radio"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                        Last day
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                      <input
+                        id="filter-radio-example-2"
+                        type="radio"
+                        value=""
+                        name="filter-radio"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                        Last 7 days
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                      <input
+                        id="filter-radio-example-3"
+                        type="radio"
+                        value=""
+                        name="filter-radio"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                        Last 30 days
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                      <input
+                        id="filter-radio-example-4"
+                        type="radio"
+                        value=""
+                        name="filter-radio"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                        Last month
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                      <input
+                        id="filter-radio-example-5"
+                        type="radio"
+                        value=""
+                        name="filter-radio"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label className="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                        Last year
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <label className="sr-only">Search</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="table-search"
+                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search for items"
+              />
+            </div>
+          </div>
+
+          <div className="h-full w-full rounded-lg bg-red-50 text-black relative overflow-x-auto shadow-lg">
             <table className="w-full h-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
