@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import toast, {Toaster} from "react-hot-toast";
 
 import useAuthStore from "@/store/AuthStore";
 import Input from "@/components/input/Input";
@@ -16,10 +17,12 @@ import { setToken } from "@/lib/token";
 import { apiMock } from "@/lib/apiMock";
 
 export default function Login() {
+  const router = useRouter();
   const { login } = useAuthStore();
   const { mutate, isSuccess, isError, isLoading } = useMutation(
     async ({ email, password }: LoginForm) => {
-      await apiMock.post(`https://fp-rpl-backend-api-production.up.railway.app/seller/login`, {email, password})
+      await toast.promise(
+       apiMock.post(`https://fp-rpl-backend-api-production.up.railway.app/seller/login`, {email, password})
       .then( async (res) => {
         console.log(res)
         const data = res.data.data;
@@ -42,15 +45,25 @@ export default function Login() {
           token: data.token,
           password: user.data.data.password
         })
-        router.push('/')
-      })
-    }
+        setTimeout(() => {
+          router.push('/')
+        }, 2000)
+      }),
+      {
+        success: 'Login Successful',
+        loading: 'Loading...',
+        error: (e) => {
+          return <p>
+            {e.response ? e.response.data.message : 'Something went wrong'}
+          </p>;
+        }
+      }
+    )}
   )
   const onSubmit = ({email, password}: LoginForm) => {
     mutate({email, password});
   }
 
-  const router = useRouter();
   const methods = useForm<LoginForm>({
     mode: "onChange",
     defaultValues: {
@@ -77,6 +90,7 @@ export default function Login() {
 
   return (
     <section className="min-h-screen w-full bg-white p-6 text-black flex justify-center items-center font-poppins">
+      <Toaster/>
       <div className="flex flex-col min-h-[93vh] w-full md:w-[55%] rounded-2xl items-center justify-center">
         <FormProvider {...methods}>
           <form

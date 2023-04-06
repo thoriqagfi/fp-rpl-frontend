@@ -7,6 +7,8 @@ import { User } from "@/types/user";
 type AuthStore = {
   user: User | null;
   isAuthenticated: boolean;
+  isLoading: boolean
+  stopLoading: () => void;
   login: (user: User) => void;
   logout: () => void;
 
@@ -15,6 +17,7 @@ type AuthStore = {
 const AuthStore = create<AuthStore>((set) => ({
   user: null,
   isAuthenticated: false,
+  isLoading: true,
   login: (user) => {
     setToken('token', user.token);
     set(
@@ -33,6 +36,13 @@ const AuthStore = create<AuthStore>((set) => ({
       })
     );
   },
+  stopLoading: () => {
+    set(
+      produce<AuthStore>((state) => {
+        state.isLoading = false
+      })
+    );
+  }
 }));
 
 const useAuthStore = createSelectorHooks(AuthStore);
