@@ -12,7 +12,7 @@ export type User = {
   no_telp: string;
   city: string;
   address: string;
-  token?: string;
+  token: string;
   role: RoleType;
   password: string;
 }
