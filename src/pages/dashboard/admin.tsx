@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import * as React from "react";
 
 import ListSideBar from "@/components/ListSideBar";
 import DropDownSidebar from "@/components/DropdownSidebar";
@@ -17,11 +17,12 @@ import { TbNotes } from "react-icons/tb";
 
 import UserProfile from "public/user-profile.jpeg";
 import PlayStore from "public/playstore.png";
+import { NextComponentType } from "next";
 
-function Admin() {
-  const [open, setOpenDropdown] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(true);
-  const [showProfile, setShowProfile] = useState(false);
+export default function Admin() {
+  const [open, setOpenDropdown] = React.useState(false);
+  const [showSideBar, setShowSideBar] = React.useState(true);
+  const [showProfile, setShowProfile] = React.useState(false);
 
   return (
     <div className="min-h-screen w-full">
@@ -152,5 +153,3 @@ function Admin() {
     </div>
   );
 }
-
-export default Admin;
