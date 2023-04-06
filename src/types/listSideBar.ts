@@ -1,5 +1,6 @@
 export type ListSideBarProps = {
-  href: string;
+  href?: string;
   icon: React.ElementType;
   name: string;
+  onClick?: () => void;
 };

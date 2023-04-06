@@ -27,7 +27,9 @@
     "react-hook-form": "^7.43.5",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.8.0",
+    "react-router-dom": "^6.10.0",
     "tailwind-merge": "^1.11.0",
+
     "typescript": "5.0.2",
     "zustand": "^4.3.6"
   },

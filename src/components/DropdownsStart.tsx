@@ -26,17 +26,17 @@ const items2: MenuProps['items'] = [
   {
     key: '1',
     label: (
-      <a target="_blank" href="#">
+      <Link href={'/'}>
         Home
-      </a>
+      </Link>
     ),
   },
   {
     key: '2',
     label: (
-      <a target="_blank" href="#">
-        About
-      </a>
+      <Link href={'/products'}>
+        Products
+      </Link>
     ),
   },
   {

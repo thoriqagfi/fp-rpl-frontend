@@ -18,17 +18,18 @@ import { apiMock } from "@/lib/apiMock";
 
 export default function Login() {
   const router = useRouter();
-  const { login } = useAuthStore();
+  const [role, setRole] = React.useState<string>('customer');
+  const { login, isAuthenticated, user } = useAuthStore();
   const { mutate, isSuccess, isError, isLoading } = useMutation(
     async ({ email, password }: LoginForm) => {
       await toast.promise(
-       apiMock.post(`https://fp-rpl-backend-api-production.up.railway.app/seller/login`, {email, password})
+       apiMock.post(`https://fp-rpl-backend-api-production.up.railway.app/${role}/login`, {email, password})
       .then( async (res) => {
         console.log(res)
         const data = res.data.data;
         setToken('token', data.token);
 
-        const user = await apiMock.get(`https://fp-rpl-backend-api-production.up.railway.app/seller/profile`, {
+        const user = await apiMock.get(`https://fp-rpl-backend-api-production.up.railway.app/${role}/profile`, {
           headers: {
             Authorization: `Bearer ${getToken()}`
           }
@@ -103,6 +104,27 @@ export default function Login() {
                 Please enter your contact detail to connect
               </h3>
             </span>
+
+            <h1 className="font-bold">Choose Your Role :</h1>
+            <div className="flex justify-evenly w-1/2">
+              <div
+                className={role === 'customer' ? 'bg-slate-300 hover:bg-slate-500 cursor-pointer px-7 py-2 rounded-lg' : 'bg-white hover:bg-slate-500 cursor-pointer px-7 py-2 rounded-lg'} onClick={() => {
+                  role === 'customer' ? setRole('') : setRole('customer')
+                }}
+              >
+                <p>Customer</p>
+              </div>
+              <div className={role === 'seller' ? 'bg-slate-300 hover:bg-slate-500 cursor-pointer px-12 py-2 rounded-lg' : 'bg-white hover:bg-slate-500 cursor-pointer px-12 py-2 rounded-lg'} onClick={() => {
+                  role === 'seller' ? setRole('') : setRole('seller')
+                }}>
+                <p>Seller</p>
+              </div>
+              <div className={role === 'admin' ? 'bg-slate-300 hover:bg-slate-500 cursor-pointer px-12 py-2 rounded-lg' : 'bg-white hover:bg-slate-500 cursor-pointer px-12 py-2 rounded-lg'} onClick={() => {
+                  role === 'admin' ? setRole('') : setRole('admin')
+                }}>
+                <p>Admin</p>
+              </div>
+            </div>
 
             <Input
               id="email"
